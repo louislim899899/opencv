@@ -1,0 +1,48 @@
+//
+//  main.cpp
+//  Opencv - Test
+//
+//  Created by Louis Lim on 20/04/2016.
+//  Copyright © 2016 Louis Lim. All rights reserved.
+//
+
+#include <iostream>
+#include <stdio.h>
+#include "camera.hpp"
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+using namespace cv;
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    /*std::cout << "OpenCV Version" << CV_VERSION <<std::endl;
+    //int image_open(1);
+    //tester();
+    //camera();
+    //int sidebyside(1);
+     */
+    Mat im1 = imread("/Users/louislim/Downloads/IMG_0123.jpg");
+    Mat im2 = imread("/Users/louislim/Downloads/IMG_0112.jpg");
+    Mat im3 = imread("/Users/louislim/Downloads/IMG_0056.jpg");
+    Mat im4 = imread("/Users/louislim/Downloads/IMG_0028.jpg");
+    Size sz1 = im1.size();
+    Size sz2 = im2.size();
+    Size sz3 = im3.size();
+    Size sz4 = im4.size();
+    Mat im_all(sz1.height+sz4.height, sz1.width+sz2.width+sz3.width, CV_8UC3);
+    Mat left(im_all, Rect(0, 0, sz1.width, sz1.height));
+    im1.copyTo(left);
+    Mat mid(im_all, Rect(sz1.width, 0, sz2.width, sz2.height));
+    im2.copyTo(mid);
+    Mat right(im_all,Rect(sz1.width+sz2.width,0,sz3.width,sz3.height));
+    im3.copyTo(right);
+    Mat bottom(im_all,Rect(0,sz1.height,sz4.width,sz4.height));
+    im4.copyTo(bottom);
+    //imshow("im_all", im_all);
+    //imwrite("/Users/louislim/Downloads/test_image.jpg",im_all);
+    waitKey(0);
+
+    return 0;
+}
