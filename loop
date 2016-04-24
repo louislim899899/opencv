@@ -41,7 +41,6 @@ loop ()
                 i++;}
         }
         imwrite("/Users/louislim/Downloads/test_image.jpg",im_all);
-        //imshow("image",image_set[3]);
         closedir(dir);
         
     }else {
