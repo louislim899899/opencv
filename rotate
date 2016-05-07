@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+void rotate () {
+    Mat warp_rotate_dst;
+    Mat scr = imread("/Users/louislim/Documents/image_test/683844e77898a907b099ecac34b3f989.jpg");
+    Point center = Point( scr.cols/2, scr.rows/2 );     //centre point of rotation
+    double angle = -90.0;           //negative is clockwise
+    double scale = 1;               //remain original size
+     Mat rot_mat = getRotationMatrix2D( center, angle, scale );         //rotation matrix with spef
+    warpAffine( scr,warp_rotate_dst, rot_mat, scr.size() );         //rotation take place
+    imshow("testing",warp_rotate_dst);
+    
+ waitKey(0);
+}
